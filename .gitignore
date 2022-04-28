@@ -1,2 +1,3 @@
-./platforms
-./plugins
+/platforms/*
+/plugins/*
+/node_modules/*
