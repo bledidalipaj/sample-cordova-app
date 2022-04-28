@@ -113,3 +113,13 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+.counter-no {
+    font-size: 20px;
+    padding: 0px 15px;
+}
+
+.decrement,
+.increment {
+    padding: 10px;
+}
