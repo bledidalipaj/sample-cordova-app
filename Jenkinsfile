@@ -4,12 +4,14 @@ pipeline {
 	stages {
 		stage('Build') {
 			steps {
-				if (params.crosswalk) {
-					echo 'crosswalk'
-				}
+				script {
+					if (params.crosswalk) {
+						echo 'crosswalk'
+					}
 
-				if (params.config) {
-					echo params.config
+					if (params.config) {
+						echo params.config
+					}
 				}
 
 				bat 'npm install'
