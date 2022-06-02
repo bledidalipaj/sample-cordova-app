@@ -2,6 +2,10 @@ def modules = [:]
 
 pipeline {
 	agent any
+	parameters {
+		string(name: 'url', trim: true, description: '')
+		string(name: 'fileName', trim: true, defaultValue: '', description: 'File to write to instead of stdout')
+	}
 
 	stages {
 		stage('Init') {
