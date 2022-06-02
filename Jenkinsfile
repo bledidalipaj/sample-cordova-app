@@ -41,7 +41,7 @@ pipeline {
 		stage('Make request to json placeholder') {
 			steps {
 				script {
-					modules.curl.buildCurlCmd(params.url, params.output)
+					bat modules.curl.buildCurlCmd(params.url, params.output)
 				}
 			}
 		}
