@@ -52,9 +52,7 @@ pipeline {
 	}
 	post {
 		always {
-			script {
-				gv.buildGruntCmd()
-			}
+			archiveArtifacts artifacts: '**/build/outputs/apk/*.apk', fingerprint: true, onlyIfSuccessful: true
 		}
 	}
 }
