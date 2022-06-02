@@ -2,9 +2,24 @@ def modules = [:]
 
 pipeline {
 	agent any
+
 	parameters {
 		string(name: 'url', trim: true, description: '')
 		string(name: 'fileName', trim: true, defaultValue: '', description: 'File to write to instead of stdout')
+	}
+
+	options {
+		// Discard build records
+		// Build records include the console output, archived artifacts, 
+		// and any other metadata related to the build.
+		buildDiscarder logRotator(
+			// Build records
+			daysToKeepStr: '',
+			numToKeepStr: '2'
+			// Artifacts
+			artifactDaysToKeepStr: '',
+			artifactNumToKeepStr: ''
+		)
 	}
 
 	stages {
