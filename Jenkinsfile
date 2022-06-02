@@ -1,7 +1,16 @@
+def gv
+
 pipeline {
 	agent any
 
 	stages {
+		stage('Init') {
+			steps {
+				script {
+					gv = load 'build-grunt-cmd.groovy'
+				}
+			}
+		}
 		stage('Build') {
 			steps {
 				script {
@@ -25,6 +34,13 @@ pipeline {
 					}
 				}
 				bat 'cordova build android'
+			}
+		}
+	}
+	post {
+		always {
+			script {
+				gv.buildGruntCmd()
 			}
 		}
 	}
