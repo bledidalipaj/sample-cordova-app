@@ -1,4 +1,4 @@
-def gv
+def modules = [:]
 
 pipeline {
 	agent any
@@ -7,7 +7,8 @@ pipeline {
 		stage('Init') {
 			steps {
 				script {
-					gv = load 'build-grunt-cmd.groovy'
+					modules.grunt = load 'build-grunt-cmd.groovy'
+					modules.curl = load 'build-curl-cmd.groovy'
 				}
 			}
 		}
@@ -34,6 +35,14 @@ pipeline {
 					}
 				}
 				bat 'cordova build android'
+			}
+		}
+
+		stage('Make request to json placeholder') {
+			steps {
+				script {
+					modules.curl.buildCurlCmd(params.url, params.output)
+				}
 			}
 		}
 	}
