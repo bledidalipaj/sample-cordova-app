@@ -13,10 +13,6 @@ pipeline {
 		// Build records include the console output, archived artifacts, 
 		// and any other metadata related to the build.
 		buildDiscarder(logRotator(
-			// Artifacts
-			artifactDaysToKeepStr: '',
-			artifactNumToKeepStr: ''
-			// Build records
 			daysToKeepStr: '',
 			numToKeepStr: '2'
 		))
