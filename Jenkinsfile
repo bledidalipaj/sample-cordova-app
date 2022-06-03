@@ -33,7 +33,7 @@ pipeline {
 						cleanWs()	
 					}
 
-					git credentialsId: 'github-creds', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.branch
+					git credentialsId: 'github-creds', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.Branch
 
 					modules.grunt = load 'build-grunt-cmd.groovy'
 					modules.curl = load 'build-curl-cmd.groovy'
