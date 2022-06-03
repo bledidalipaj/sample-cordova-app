@@ -69,7 +69,7 @@ pipeline {
 	post {
 		always {
 			archiveArtifacts artifacts: '**/build/outputs/apk/*.apk', fingerprint: true, onlyIfSuccessful: true
-			cleanWs()
+			// cleanWs()
 		}
 	}
 }
