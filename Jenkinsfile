@@ -4,12 +4,17 @@ pipeline {
 	agent any
 
 	parameters {
-		string(name: 'url', trim: true, description: '')
+		string(name: 'url', trim: true, description: '', defaultValue: '')
 		string(name: 'fileName', trim: true, defaultValue: '', description: 'File to write to instead of stdout')
-		booleanParam(name: 'Fresh_Build', defaultValue: false, description: '')
+
+		string(name: 'Branch', trime: true, defaultValue: 'master', description: '')
+		string(name: 'Tag', trim: true, defaultValue: '', description: '')
+		booleanParam(name: 'Fresh Start', defaultValue: false, description: 'Start fresh. Delete workspace before build.')
 	}
 
 	options {
+		skipDefaultCheckout(true)
+
 		// Discard build records
 		// Build records include the console output, archived artifacts, 
 		// and any other metadata related to the build.
@@ -23,9 +28,12 @@ pipeline {
 		stage('Init') {
 			steps {
 				script {
-					if (params.Fresh_Build) {
-						echo 'Fresh build'
+					if (params['Fresh Start']) {
+						echo 'Cleaning...'
+						cleanWs()	
 					}
+
+					git credentialsId: 'github-creds', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.branch
 
 					modules.grunt = load 'build-grunt-cmd.groovy'
 					modules.curl = load 'build-curl-cmd.groovy'
@@ -59,6 +67,9 @@ pipeline {
 		}
 
 		stage('Make request to json placeholder') {
+			when {
+				expression { params.url != '' }
+			}
 			steps {
 				script {
 					bat modules.curl.buildCurlCmd(params.url, params.fileName)
