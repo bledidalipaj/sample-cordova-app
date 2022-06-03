@@ -6,7 +6,7 @@ pipeline {
 	parameters {
 		string(name: 'url', trim: true, description: '')
 		string(name: 'fileName', trim: true, defaultValue: '', description: 'File to write to instead of stdout')
-		booleanParam(name: 'Fresh_Build', defaultValue: false, description)
+		booleanParam(name: 'Fresh_Build', defaultValue: false, description: '')
 	}
 
 	options {
