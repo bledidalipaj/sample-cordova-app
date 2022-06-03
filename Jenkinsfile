@@ -6,6 +6,7 @@ pipeline {
 	parameters {
 		string(name: 'url', trim: true, description: '')
 		string(name: 'fileName', trim: true, defaultValue: '', description: 'File to write to instead of stdout')
+		booleanParam(name: 'Fresh build', defaultValue: false, description)
 	}
 
 	options {
@@ -22,6 +23,10 @@ pipeline {
 		stage('Init') {
 			steps {
 				script {
+					if (params['Fresh build']) {
+						echo 'Fresh build'
+					}
+
 					modules.grunt = load 'build-grunt-cmd.groovy'
 					modules.curl = load 'build-curl-cmd.groovy'
 				}
