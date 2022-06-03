@@ -7,7 +7,7 @@ pipeline {
 		string(name: 'url', trim: true, description: '', defaultValue: '')
 		string(name: 'fileName', trim: true, defaultValue: '', description: 'File to write to instead of stdout')
 
-		string(name: 'Branch', trime: true, defaultValue: 'master', description: '')
+		string(name: 'Branch', trim: true, defaultValue: 'master', description: '')
 		string(name: 'Tag', trim: true, defaultValue: '', description: '')
 		booleanParam(name: 'Fresh Start', defaultValue: false, description: 'Start fresh. Delete workspace before build.')
 	}
