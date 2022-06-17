@@ -43,7 +43,13 @@ pipeline {
 
 		stage('Before build') {
 			steps {
-				bat 'grunt clean-before-build'
+				script {
+					try {
+						bat 'grunt clean-before-build'
+					} catch (error) {
+						echo error.getMessage()
+					}
+				}
 			}
 		}
 		stage('Build') {
