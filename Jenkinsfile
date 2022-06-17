@@ -72,6 +72,7 @@ pipeline {
 						bat 'cordova platform add android'
 					} catch (error) {
 						echo error.getMessage()
+						bat 'cordova platform add android'
 					}
 				}
 				bat 'cordova build android'
