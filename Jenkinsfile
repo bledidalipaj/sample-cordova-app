@@ -13,7 +13,7 @@ pipeline {
 	}
 
 	options {
-		skipDefaultCheckout(true)
+		// skipDefaultCheckout(true)
 
 		// Discard build records
 		// Build records include the console output, archived artifacts, 
@@ -28,16 +28,22 @@ pipeline {
 		stage('Init') {
 			steps {
 				script {
-					if (params['Fresh Start']) {
-						echo 'Cleaning...'
-						cleanWs()	
-					}
+					// if (params['Fresh Start']) {
+					// 	echo 'Cleaning...'
+					// 	cleanWs()	
+					// }
 
-					git credentialsId: 'github-creds', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.Branch
+					// git credentialsId: 'github-creds', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.Branch
 
 					modules.grunt = load 'build-grunt-cmd.groovy'
 					modules.curl = load 'build-curl-cmd.groovy'
 				}
+			}
+		}
+
+		stage('Before build') {
+			steps {
+				bat 'grunt clean-before-build'
 			}
 		}
 		stage('Build') {
@@ -81,6 +87,11 @@ pipeline {
 		always {
 			archiveArtifacts artifacts: '**/build/outputs/apk/*.apk', fingerprint: true, onlyIfSuccessful: true
 			// cleanWs()
+		}
+
+		success {
+			bat 'copy config.xml config__previous-build.xml';
+			bat 'copy package.json package__previous-build.json';
 		}
 	}
 }

@@ -23,5 +23,8 @@
     "platforms": [
       "android"
     ]
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5"
   }
 }
