@@ -39,7 +39,7 @@ pipeline {
 
 	stage('Save workspace') {
 		when {
-			expression { params.['Save workspace'] == true }
+			expression { params['Save workspace'] == true }
 		}
 		steps {
 			echo 'Copy workspace'
