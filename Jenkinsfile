@@ -7,6 +7,7 @@ pipeline {
 
 		string(name: 'Branch', trim: true, defaultValue: 'master', description: '')
 		booleanParam(name: 'Save workspace', defaultValue: false, description: 'Save workspace')
+		string(name: 'Tag', trim: true, defaultValue: '', description: 'Your tag')
 	}
 
 	options {
@@ -26,6 +27,10 @@ pipeline {
 					cleanWs()
 
 					git credentialsId: '', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.Branch
+
+					if  (params.Tag) {
+						git checkout params.Tag
+					}
 				}
 			}
 		}
