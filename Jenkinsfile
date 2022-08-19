@@ -29,7 +29,7 @@ pipeline {
 					git credentialsId: '', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.Branch
 
 					if  (params.Tag) {
-						git checkout params.Tag
+						sh "git checkout tags/${params.Tag}"
 					}
 				}
 			}
