@@ -6,6 +6,7 @@ pipeline {
 		string(name: 'fileName', trim: true, defaultValue: '', description: 'File to write to instead of stdout')
 
 		string(name: 'Branch', trim: true, defaultValue: 'master', description: '')
+		booleanParam(name: 'Save workspace', defaultValue: false, description: 'Save workspace')
 	}
 
 	options {
@@ -35,6 +36,17 @@ pipeline {
 			}
 		}
 	}
+
+	stage('Save workspace') {
+		when {
+			expression { params.['Save workspace'] == true }
+		}
+		steps {
+			echo 'Copy workspace'
+		}
+	}
+
+
 	post {
 		always {
 			archiveArtifacts artifacts: '**/build/outputs/apk/*.apk', fingerprint: true, onlyIfSuccessful: true
