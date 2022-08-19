@@ -35,17 +35,16 @@ pipeline {
 				echo 'Hello there'
 			}
 		}
-	}
 
-	stage('Save workspace') {
-		when {
-			expression { params['Save workspace'] == true }
-		}
-		steps {
-			echo 'Copy workspace'
+		stage('Save workspace') {
+			when {
+				expression { params['Save workspace'] == true }
+			}
+			steps {
+				echo 'Copy workspace'
+			}
 		}
 	}
-
 
 	post {
 		always {
