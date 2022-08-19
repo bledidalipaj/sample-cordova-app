@@ -13,7 +13,7 @@ pipeline {
 	}
 
 	stages {
-		stage('Checkout SCM') {
+		stage('Checkout SCM 2') {
 			steps {
 				script {
 					// if (params['Fresh Start']) {
@@ -26,9 +26,9 @@ pipeline {
 			}
 		}
 
-		stage('Create hello.txt') {
+		stage('Test') {
 			steps {
-				bat 'type null > hello.txt'
+				echo 'Hello there'
 			}
 		}
 	}
