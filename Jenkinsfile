@@ -13,6 +13,13 @@ pipeline {
 	}
 
 	stages {
+
+		stage('Clean workspace') {
+			steps {
+				cleanWs();
+			}
+		}
+
 		stage('Checkout SCM 2') {
 			steps {
 				script {
@@ -21,7 +28,7 @@ pipeline {
 					// 	cleanWs()	
 					// }
 
-					git credentialsId: 'github-creds', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.Branch
+					git credentialsId: '', poll: false, url: 'https://github.com/bledidalipaj/sample-cordova-app.git', branch: params.Branch
 				}
 			}
 		}
